@@ -12,14 +12,14 @@ type Props = {
   duration: string;
 };
 
-const WorkCard = ({
+export default function WorkCard({
   title,
   distance,
   location,
   date,
   price,
   duration,
-}: Props) => {
+}: Props) {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent
@@ -54,6 +54,4 @@ const WorkCard = ({
       </CardContent>
     </Card>
   );
-};
-
-export default WorkCard;
+}
