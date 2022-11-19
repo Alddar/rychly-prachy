@@ -2,6 +2,8 @@ import WorkCard from "../components/complex/WorkCard";
 import { Box, InputAdornment, Stack, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import { FilterAltOutlined, Search, Sort } from "@mui/icons-material";
+import PageTitle from "../components/PageTitle";
+import * as React from "react";
 
 const workList = [
   {
@@ -68,10 +70,8 @@ export default function Home() {
   };
   return (
     <>
-      <Typography variant="h3" gutterBottom>
-        Nabídky
-      </Typography>
-      <Box pb={"2em"}>
+      <PageTitle>Nabídky</PageTitle>
+      <Box py={"2em"}>
         <TextField
           id="standard-basic"
           label="Jakou práci hledáte?"
