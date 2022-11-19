@@ -6,6 +6,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import { Box } from "@mui/system";
 
 export default function Layout({ children }: { children: any }) {
   return (
@@ -32,9 +33,9 @@ export default function Layout({ children }: { children: any }) {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <main>
+      <Box component={"main"} pt={"1.2em"}>
         <Container>{children}</Container>
-      </main>
+      </Box>
     </>
   );
 }
