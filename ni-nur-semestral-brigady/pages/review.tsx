@@ -6,15 +6,14 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 import Button from "@mui/material/Button";
 
-export default function BasicRating() {
-    const [rating, setRatingRating] = React.useState<number | null>(null);
-    const [textRating, setTextRating] = React.useState('');
+interface JobRating {
+    starRating?: number
+    textRating?: string
+}
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setTextRating(event.target.value);
-    };
-    
-    
+export default function BasicRating() {
+    const [state, setState] = React.useState<JobRating>({});
+
     return (
         <Grid
             container
@@ -32,10 +31,10 @@ export default function BasicRating() {
                 <Typography component="legend"></Typography>
                 <Rating
                     name="simple-controlled"
-                    value={rating}
+                    value={state?.starRating || null}
                     size="large"
                     onChange={(event, newValue) => {
-                        setRatingRating(newValue);
+                        setState((state) => ({...state, starRating: newValue!}));
                     }}
                 />
             </Grid>
@@ -45,8 +44,11 @@ export default function BasicRating() {
                     label="Volitelný komentář"
                     multiline
                     minRows={5}
-                    value={textRating}
-                    onChange={handleChange}
+                    maxRows={20}
+                    value={state?.textRating || ""}
+                    onChange={(event) => {
+                        setState((state) => ({...state, textRating: event.target.value!}));
+                    }}
                 />
             </Grid>
             <Grid item xs={12}>
