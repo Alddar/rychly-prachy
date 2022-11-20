@@ -47,14 +47,14 @@ export default function Layout({children}: { children: any }) {
         >
             <List>
                 <Link href="/">
-                        <ListItem key="home" disablePadding>
-                            <ListItemButton>
-                                <ListItemIcon>
-                                    <HomeIcon/>
-                                </ListItemIcon>
-                                <ListItemText primary="Domů"/>
-                            </ListItemButton>
-                        </ListItem>
+                    <ListItem key="home" disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                <HomeIcon/>
+                            </ListItemIcon>
+                            <ListItemText primary="Domů"/>
+                        </ListItemButton>
+                    </ListItem>
                 </Link>
                 <ListItem key="myWork" disablePadding>
                     <ListItemButton>
@@ -64,7 +64,6 @@ export default function Layout({children}: { children: any }) {
                         <ListItemText primary="Moje brigády"/>
                     </ListItemButton>
                 </ListItem>
-
             </List>
             <Divider/>
             <List>
