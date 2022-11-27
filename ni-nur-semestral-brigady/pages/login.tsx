@@ -13,6 +13,8 @@ import { useRouter } from "next/router";
 import { Alert } from "@mui/material";
 import Image from "next/image";
 import logo from "../public/img/logo.png";
+import { useContext, useEffect } from "react";
+import { GlobalContext } from "./_app";
 
 function Copyright(props: any) {
   return (
@@ -40,6 +42,13 @@ const theme = createTheme();
 export default function SignIn() {
   const { push } = useRouter();
   const [error, setError] = React.useState<string | undefined>();
+  const { user, setUser } = useContext(GlobalContext);
+
+  useEffect(() => {
+    if (user) {
+      push("/");
+    }
+  }, [user]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -59,6 +68,7 @@ export default function SignIn() {
       return;
     }
 
+    setUser({ name: "admin" });
     push("/");
   };
 

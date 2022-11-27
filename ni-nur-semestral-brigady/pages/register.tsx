@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import InputAdornment from "@mui/material/InputAdornment"
+import InputAdornment from "@mui/material/InputAdornment";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -11,6 +11,8 @@ import * as React from "react";
 import PageTitle from "../components/PageTitle";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
+import { useContext } from "react";
+import { GlobalContext } from "./_app";
 const ReactCodeInput = dynamic(import("react-code-input"));
 
 export default function Profile() {
@@ -20,8 +22,13 @@ export default function Profile() {
   const [pinValue, setPinValue] = React.useState<string>("");
   const { push } = useRouter();
   const [ageConfirmation, setAgeConfirmation] = React.useState<boolean>(false);
+  const { setUser } = useContext(GlobalContext);
+  const [email, setEmail] = React.useState<string>("");
 
-  const updateAgeConfirmation = (event: React.FormEvent<HTMLFormElement>, value: boolean) => {
+  const updateAgeConfirmation = (
+    event: React.FormEvent<HTMLFormElement>,
+    value: boolean
+  ) => {
     event.preventDefault();
     setAgeConfirmation(value);
   };
@@ -34,13 +41,18 @@ export default function Profile() {
     const passwordRepeat = data.get("passwordRepeat") as string;
     const phoneNumber = data.get("phoneNumber") as string;
 
-    if (email.length == 0 || password.length == 0 || passwordRepeat.length == 0 || phoneNumber.length == 0) {
+    if (
+      email.length == 0 ||
+      password.length == 0 ||
+      passwordRepeat.length == 0 ||
+      phoneNumber.length == 0
+    ) {
       setError("Je potřeba vyplnit všechna pole.");
       return;
     }
 
     if (password != passwordRepeat) {
-      setError("Hesla se neshodují.")
+      setError("Hesla se neshodují.");
       return;
     }
 
@@ -48,7 +60,8 @@ export default function Profile() {
       setError("Je potřeba potvrdit, že jste starší 15 let.");
       return;
     }
-    
+
+    setEmail(email);
     setError(undefined);
     nextStep();
   };
@@ -68,6 +81,7 @@ export default function Profile() {
     setError(undefined);
     nextStep();
     setTimeout(() => {
+      setUser({ name: email });
       push("/");
     }, 5000);
   };
@@ -77,60 +91,68 @@ export default function Profile() {
       <PageTitle>Registrace</PageTitle>
       {currentStep === 0 && (
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email"
-                type="email"
-                name="email"
-                autoFocus
-            />
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Heslo"
-                type="password"
-                id="password"
-            />
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="passwordRepeat"
-                label="Heslo znovu"
-                type="password"
-                id="passwordRepeat"
-            />
-            <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="phoneNumber"
-                label="Telefonní číslo"
-                type="number"
-                id="phoneNumber"
-                InputProps={{
-                  startAdornment: <InputAdornment position="start">+420</InputAdornment>,
-                }}
-            />
-            <FormControlLabel
-                control={<Checkbox value={ageConfirmation} color="primary" onChange={(event, value: boolean) => setAgeConfirmation(value)}/>}
-                label="Potvrzuji, že jsem starší 15 let"
-            />
-            {error && <Alert severity="error">{error}</Alert>}
-            <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                sx={{ mt: 3, mb: 2 }}
-            >
-              Registrovat
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email"
+            type="email"
+            name="email"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Heslo"
+            type="password"
+            id="password"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="passwordRepeat"
+            label="Heslo znovu"
+            type="password"
+            id="passwordRepeat"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="phoneNumber"
+            label="Telefonní číslo"
+            type="number"
+            id="phoneNumber"
+            InputProps={{
+              startAdornment: (
+                <InputAdornment position="start">+420</InputAdornment>
+              ),
+            }}
+          />
+          <FormControlLabel
+            control={
+              <Checkbox
+                value={ageConfirmation}
+                color="primary"
+                onChange={(event, value: boolean) => setAgeConfirmation(value)}
+              />
+            }
+            label="Potvrzuji, že jsem starší 15 let"
+          />
+          {error && <Alert severity="error">{error}</Alert>}
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Registrovat
           </Button>
-      </Box>
+        </Box>
       )}
       {currentStep === 1 && (
         <Box
