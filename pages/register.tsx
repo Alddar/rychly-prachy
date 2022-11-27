@@ -24,14 +24,7 @@ export default function Profile() {
   const [ageConfirmation, setAgeConfirmation] = React.useState<boolean>(false);
   const { setState } = useContext(StateContext);
   const [email, setEmail] = React.useState<string>("");
-
-  const updateAgeConfirmation = (
-    event: React.FormEvent<HTMLFormElement>,
-    value: boolean
-  ) => {
-    event.preventDefault();
-    setAgeConfirmation(value);
-  };
+  const [phone, setPhone] = React.useState<string>("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -62,6 +55,7 @@ export default function Profile() {
     }
 
     setEmail(email);
+    setPhone(phoneNumber);
     setError(undefined);
     nextStep();
   };
@@ -81,7 +75,7 @@ export default function Profile() {
     setError(undefined);
     nextStep();
     setTimeout(() => {
-      setState((state) => ({...state, user: {name: email }}));
+      setState((state) => ({...state, user: {email: email, phone: phone, address: {street: "", city: "", postCode: ""}}}));
       push("/");
     }, 5000);
   };
@@ -162,7 +156,7 @@ export default function Profile() {
           sx={{ mt: 1, pt: 8 }}
         >
           <Typography variant={"h5"} textAlign={"center"}>
-            Zadejte aktivační kod z SMS
+            Zadejte aktivační kód z SMS
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "center" }} py={"1em"}>
             <ReactCodeInput

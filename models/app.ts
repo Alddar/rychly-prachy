@@ -29,5 +29,11 @@ export interface Offer {
 }
 
 export interface User {
-    name: string
+    email: string
+    phone: string
+    address: {
+        street: string;
+        city: string;
+        postCode: string;
+    }
 }

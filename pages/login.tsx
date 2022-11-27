@@ -68,7 +68,7 @@ export default function SignIn() {
       return;
     }
 
-    setState((state) => ({ ...state, user: { name: "admin" }}));
+    setState((state) => ({ ...state, user: { email: "admin", phone: "", address: {street: "", city: "", postCode: ""} }}));
     push("/");
   };
 
