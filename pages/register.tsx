@@ -22,7 +22,7 @@ export default function Profile() {
   const [pinValue, setPinValue] = React.useState<string>("");
   const { push } = useRouter();
   const [ageConfirmation, setAgeConfirmation] = React.useState<boolean>(false);
-  const { setUser } = useContext(StateContext);
+  const { setState } = useContext(StateContext);
   const [email, setEmail] = React.useState<string>("");
 
   const updateAgeConfirmation = (
@@ -81,7 +81,7 @@ export default function Profile() {
     setError(undefined);
     nextStep();
     setTimeout(() => {
-      setUser({ name: email });
+      setState((state) => ({...state, user: {name: email }}));
       push("/");
     }, 5000);
   };

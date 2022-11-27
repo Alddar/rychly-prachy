@@ -18,7 +18,7 @@ import * as React from "react";
 import Link from "next/link";
 import { StateContext } from "./_app";
 import { useContext, useEffect, useState } from "react";
-import { defaultFilterState, Filter, FilterState } from "./filter";
+import { defaultFilterState, Filter, FilterState } from "../components/complex/Filter";
 import diacritics from "diacritics";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
@@ -165,6 +165,7 @@ export default function Home() {
       <Stack spacing={2}>
         {(filterState.sort
           ? [...state.offerList].sort((a, b) =>
+              // @ts-ignore
               (filterState.sortDirection ? 1 : -1) * (a[filterState.sort] > b[filterState.sort] ? 1 : -1)
             )
           : state.offerList
