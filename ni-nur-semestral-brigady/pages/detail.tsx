@@ -17,21 +17,13 @@ import MailIcon from "@mui/icons-material/MailOutline";
 import PhoneIcon from "@mui/icons-material/Phone";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import {getOffer, getUser} from "../models/dataContainer";
 
 export default function Filter() {
-  const offer: Offer = {
-    title: "Rychlý prachy",
-    description:
-      "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Nam sed tellus id magna elementum tincidunt. In convallis. Nulla non lectus sed nisl molestie malesuada. Donec quis nibh at felis congue commodo. In enim a arcu imperdiet malesuada.",
-    distance: 5,
-    requirements: ["Pouze ženy"],
-    location: "Praha",
-    date: DateTime.local(2022, 5, 12, 16, 30),
-    price: 500,
-    duration: 0.05,
-  };
+  const offer = getOffer(1);
+  const user = getUser(offer.ownerId)
 
-  const position: LatLngExpression = [50.06961, 14.374329];
+  const position: LatLngExpression = offer.position;
 
   const [isInterestGiven, setInterestGiven] = useState(false);
 
@@ -71,9 +63,9 @@ export default function Filter() {
             <Box sx={{ display: "flex" }}>
               <Avatar sx={{ bgcolor: "#fb3", marginRight: "1rem" }}>M</Avatar>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography>Anonymní Borec</Typography>
+                <Typography>{user.name}</Typography>
                 <Typography variant="caption">
-                  1.1 <StarIcon sx={{ fontSize: 11 }} />
+                  {user.rating} <StarIcon sx={{ fontSize: 11 }} />
                 </Typography>
               </Box>
             </Box>
@@ -87,9 +79,9 @@ export default function Filter() {
             <List disablePadding>
               <ListItem disablePadding>
                 <Typography variant="h6">
-                  Anonymní Borec{" "}
+                  {user.name}{" "}
                   <Typography variant="caption">
-                    1.1 <StarIcon sx={{ fontSize: 11 }} />
+                    {user.rating} <StarIcon sx={{ fontSize: 11 }} />
                   </Typography>
                 </Typography>
               </ListItem>
@@ -97,13 +89,13 @@ export default function Filter() {
                 <ListItemIcon>
                   <MailIcon />
                 </ListItemIcon>
-                <ListItemText primary="doveseh733@teknowa.com" />
+                <ListItemText primary={user.email} />
               </ListItem>
               <ListItem disablePadding>
                 <ListItemIcon>
                   <PhoneIcon />
                 </ListItemIcon>
-                <ListItemText primary="+420 123 456 789" />
+                <ListItemText primary={user.phone} />
               </ListItem>
             </List>
             <Button variant="contained" onClick={() => setInterestGiven(false)}>
