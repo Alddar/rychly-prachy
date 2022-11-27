@@ -14,7 +14,7 @@ import { Alert } from "@mui/material";
 import Image from "next/image";
 import logo from "../public/img/logo.png";
 import { useContext, useEffect } from "react";
-import { GlobalContext } from "./_app";
+import { StateContext } from "./_app";
 
 function Copyright(props: any) {
   return (
@@ -42,13 +42,13 @@ const theme = createTheme();
 export default function SignIn() {
   const { push } = useRouter();
   const [error, setError] = React.useState<string | undefined>();
-  const { user, setUser } = useContext(GlobalContext);
+  const { state, setState } = useContext(StateContext);
 
   useEffect(() => {
-    if (user) {
+    if (state.user) {
       push("/");
     }
-  }, [user]);
+  }, [state]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -61,14 +61,14 @@ export default function SignIn() {
       return;
     }
 
-    if (email != "admin" && password != "admin") {
+    if (email != "admin" || password != "admin") {
       setError(
         "Zadali jste špatné přihlašovací údaje. (Použijte testovací: admin/admin)"
       );
       return;
     }
 
-    setUser({ name: "admin" });
+    setState((state) => ({ ...state, user: { name: "admin" }}));
     push("/");
   };
 

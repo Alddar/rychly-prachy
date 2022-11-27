@@ -1,6 +1,18 @@
 import { DateTime } from "luxon";
-import { User } from "./user";
 import {LatLngExpression} from "leaflet";
+
+export interface Provider {
+    id: number;
+    name: string;
+    email: string;
+    phone: string;
+    address: {
+        street: string;
+        city: string;
+        postCode: string;
+    }
+    rating: number;
+}
 
 export interface Offer {
     id: number;
@@ -14,4 +26,8 @@ export interface Offer {
     distance: number;
     date: DateTime;
     ownerId: number;
+}
+
+export interface User {
+    name: string
 }

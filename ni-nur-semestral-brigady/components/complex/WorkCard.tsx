@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Offer } from "../../models/offer";
+import { Offer } from "../../models/app";
 
 export type WorkCardProps = {
   offer: Offer

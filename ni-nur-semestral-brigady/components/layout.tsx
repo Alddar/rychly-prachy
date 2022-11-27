@@ -18,13 +18,13 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Divider from "@mui/material/Divider";
 import { useContext } from "react";
-import { GlobalContext } from "../pages/_app";
+import { StateContext } from "../pages/_app";
 import { useRouter } from "next/router";
 import { AppRegistrationOutlined } from "@mui/icons-material";
 
 export default function Layout({ children }: { children: any }) {
-  const { user, setUser } = useContext(GlobalContext);
-  const [menuBarState, setState] = React.useState(false);
+  const { state, setState } = useContext(StateContext);
+  const [menuBarState, setMenuBarState] = React.useState(false);
   const { push } = useRouter();
 
   const toggleDrawer =
@@ -38,7 +38,7 @@ export default function Layout({ children }: { children: any }) {
         return;
       }
 
-      setState(open);
+      setMenuBarState(open);
     };
 
   const list = () => (
@@ -69,7 +69,7 @@ export default function Layout({ children }: { children: any }) {
         </ListItem>
       </List>
       <Divider />
-      {user ? (
+      { state.user ? (
         <List>
           <ListItem key="logout" disablePadding>
             <ListItemButton>
@@ -79,7 +79,7 @@ export default function Layout({ children }: { children: any }) {
               <ListItemText
                 primary="Odhlásit se"
                 onClick={() => {
-                  setUser(null);
+                  setState((state) => ({...state, user: null}));
                   push("/");
                 }}
               />
@@ -101,7 +101,7 @@ export default function Layout({ children }: { children: any }) {
               />
             </ListItemButton>
           </ListItem>
-          <ListItem key="login" disablePadding>
+          <ListItem key="register" disablePadding>
             <ListItemButton>
               <ListItemIcon>
                 <AppRegistrationOutlined />

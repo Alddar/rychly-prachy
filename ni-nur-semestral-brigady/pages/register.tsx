@@ -12,7 +12,7 @@ import PageTitle from "../components/PageTitle";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useContext } from "react";
-import { GlobalContext } from "./_app";
+import { StateContext } from "./_app";
 const ReactCodeInput = dynamic(import("react-code-input"));
 
 export default function Profile() {
@@ -22,7 +22,7 @@ export default function Profile() {
   const [pinValue, setPinValue] = React.useState<string>("");
   const { push } = useRouter();
   const [ageConfirmation, setAgeConfirmation] = React.useState<boolean>(false);
-  const { setUser } = useContext(GlobalContext);
+  const { setUser } = useContext(StateContext);
   const [email, setEmail] = React.useState<string>("");
 
   const updateAgeConfirmation = (

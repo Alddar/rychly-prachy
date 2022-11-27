@@ -18,6 +18,8 @@ import "@fontsource/poppins/800.css";
 import "@nextcss/reset";
 import "../styles/global.css";
 import { createContext, useMemo, useState } from "react";
+import { Offer, Provider, User } from "../models/app";
+import { offerList, providerList } from "../fixtures/app";
 
 const createEmotionCache = () => {
   return createCache({ key: "css", prepend: true });
@@ -25,35 +27,37 @@ const createEmotionCache = () => {
 
 const clientSideEmotioNCache = createEmotionCache();
 
-type User = {
-  name: string;
-};
+export interface State {
+  user: User | null,
+  offerList: Offer[],
+  providerList: Provider[]
+}
 
-export const GlobalContext = createContext<{
-  user: User | null;
-  setUser: (user: User) => void;
-}>({ user: null, setUser: () => {} });
-const ThingsProvider = GlobalContext.Provider;
+const defaultState =  {
+  user: null,
+  offerList,
+  providerList
+}
+
+export const StateContext = createContext({
+  state: defaultState as State,
+  setState: (modifyState: (state: State) => State) => {}
+});
 
 export default function App({ Component, pageProps }: AppProps) {
-  const [user, setUser] = useState<User | null>(null);
-  const initContextState = useMemo(() => {
-    return {
-      user,
-      setUser,
-    };
-  }, [user, setUser]);
+  const [state, setState] = useState<State>(defaultState);
+
 
   return (
     <CacheProvider value={clientSideEmotioNCache}>
       <LocalizationProvider dateAdapter={AdapterLuxon}>
         <ThemeProvider theme={theme}>
           <CssBaseline />
-          <ThingsProvider value={initContextState}>
+          <StateContext.Provider value={{state, setState}}>
             <Layout>
               <Component {...pageProps} />
             </Layout>
-          </ThingsProvider>
+          </StateContext.Provider>
         </ThemeProvider>
       </LocalizationProvider>
     </CacheProvider>

@@ -1,8 +1,6 @@
-import {Offer} from "./offer";
-import {User} from "./user";
 import {DateTime} from "luxon";
 import {LatLngExpression} from "leaflet";
-import {name} from "next/dist/telemetry/ci-info";
+import { Offer, Provider } from "../models/app";
 
 function getRandomFloat(min: number, max: number, decimals: number) {
     const str = (Math.random() * (max - min) + min).toFixed(decimals);
@@ -15,7 +13,7 @@ function generatePraguePosition(): LatLngExpression {
         getRandomFloat(14.30, 14.60, 6)];
 }
 
-const userDatabase: User[] = [
+export const providerList: Provider[] = [
     {
         id: 1,
         name: "Jan Novák",
@@ -54,7 +52,7 @@ const userDatabase: User[] = [
     }
 ]
 
-const offerDatabase: Offer[] = [
+export const offerList: Offer[] = [
     {
         id: 1,
         title: "Sekání trávy",
@@ -64,7 +62,7 @@ const offerDatabase: Offer[] = [
         location: "Praha",
         distance: 3,
         date: DateTime.local(2022, 5, 12, 16, 30),
-        position: generatePraguePosition(),
+        position: [50.026372, 14.517759],
         price: 500,
         duration: 2,
         ownerId: 1
@@ -77,8 +75,8 @@ const offerDatabase: Offer[] = [
         requirements: ["Zdravý selský rozum", "Znalost dětí", "Nebýt čorka"],
         location: "Praha",
         distance: 10,
-        date: DateTime.local(2022, 5, 12, 16, 30),
-        position: generatePraguePosition(),
+        date: DateTime.local(2022, 12, 20, 12, 0),
+        position: [50.020514, 14.499634],
         price: 100,
         duration: 6,
         ownerId: 3
@@ -91,8 +89,8 @@ const offerDatabase: Offer[] = [
         requirements: ["Výdrž", "Mozek", "Nebýt čorka"],
         location: "Praha",
         distance: 10,
-        date: DateTime.local(2022, 5, 15, 16, 30),
-        position: generatePraguePosition(),
+        date: DateTime.local(2023, 1, 20, 10, 30),
+        position: [50.051647, 14.479273],
         price: 90,
         duration: 3,
         ownerId: 1
@@ -100,10 +98,10 @@ const offerDatabase: Offer[] = [
 ]
 
 
-export function getUser(id: number): User {
-    return userDatabase.find((x) => x.id == id) ?? userDatabase[0]
+export function getProvider(providerList: Provider[], id: number): Provider {
+    return providerList.find((x) => x.id == id) ?? providerList[0]
 }
 
-export function getOffer(id: number): Offer {
-    return offerDatabase.find((x) => x.id == id) ?? offerDatabase[0]
+export function getOffer(offerList: Offer[], id: number): Offer {
+    return offerList.find((x) => x.id == id) ?? offerList[0]
 }
