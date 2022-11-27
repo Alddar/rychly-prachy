@@ -4,59 +4,22 @@ import TextField from "@mui/material/TextField";
 import { FilterAltOutlined, Search, Sort } from "@mui/icons-material";
 import PageTitle from "../components/PageTitle";
 import * as React from "react";
-
-const workList = [
-  {
-    title: "Název práce",
-    distance: "0.5km",
-    location: "Praha",
-    date: "23. 10",
-    price: "100 Kč/h",
-    duration: "3 hod",
-  },
-  {
-    title: "Název práce",
-    distance: "0.5km",
-    location: "Praha",
-    date: "23. 10",
-    price: "100 Kč/h",
-    duration: "3 hod",
-  },
-  {
-    title: "Název práce",
-    distance: "0.5km",
-    location: "Praha",
-    date: "23. 10",
-    price: "100 Kč/h",
-    duration: "3 hod",
-  },
-  {
-    title: "Název práce",
-    distance: "0.5km",
-    location: "Praha",
-    date: "23. 10",
-    price: "100 Kč/h",
-    duration: "3 hod",
-  },
-  {
-    title: "Název práce",
-    distance: "0.5km",
-    location: "Praha",
-    date: "23. 10",
-    price: "100 Kč/h",
-    duration: "3 hod",
-  },
-  {
-    title: "Název práce",
-    distance: "0.5km",
-    location: "Praha",
-    date: "23. 10",
-    price: "100 Kč/h",
-    duration: "3 hod",
-  },
-];
+import { Offer } from "../models/offer";
+import { DateTime } from "luxon";
+import Link from "next/link";
 
 export default function Home() {
+  const workList: Offer[] = new Array(10).fill({
+    title: "Název práce",
+    description: "",
+    distance: 0.5,
+    location: "Praha",
+    requirements: [],
+    date: DateTime.local(2022, 5, 12, 8, 30),
+    price: 100,
+    duration: 3,
+  })
+
   const onSearch = async (term: string) => {
     console.log(term);
   };
@@ -96,7 +59,9 @@ export default function Home() {
       </Stack>
       <Stack spacing={2}>
         {workList.map((work, idx) => (
-          <WorkCard key={`work-card-${idx}`} {...work} />
+          <Link href="/detail" key={`work-card-${idx}`}>
+            <WorkCard offer={work} />
+          </Link>
         ))}
       </Stack>
     </>

@@ -2,24 +2,15 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
+import { Offer } from "../../models/offer";
 
-type Props = {
-  title: string;
-  distance: string;
-  location: string;
-  date: string;
-  price: string;
-  duration: string;
+export type WorkCardProps = {
+  offer: Offer
 };
 
 export default function WorkCard({
-  title,
-  distance,
-  location,
-  date,
-  price,
-  duration,
-}: Props) {
+  offer
+}: WorkCardProps) {
   return (
     <Card sx={{ minWidth: 275 }}>
       <CardContent
@@ -31,24 +22,24 @@ export default function WorkCard({
       >
         <Box>
           <Typography variant="h5" gutterBottom>
-            {title}
+            {offer.title}
           </Typography>
           <Typography variant="subtitle2" component="div">
-            {distance}
+            {offer.distance} km
           </Typography>
           <Typography variant="subtitle2" color="text.secondary">
-            {location}
+            {offer.location}
           </Typography>
         </Box>
         <Box>
-          <Typography variant="h5" gutterBottom>
-            {date}
-          </Typography>
+            <Typography variant="h5" gutterBottom>
+              <div suppressHydrationWarning={true}>{offer.date.toLocaleString()}</div>
+            </Typography>
           <Typography variant="subtitle2" component="div">
-            {price}
+            {offer.price} Kč
           </Typography>
           <Typography variant="subtitle2" color="text.secondary">
-            {duration}
+            {offer.duration} h
           </Typography>
         </Box>
       </CardContent>
