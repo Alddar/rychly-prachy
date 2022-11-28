@@ -43,40 +43,37 @@ export default function Layout({ children }: { children: any }) {
 
   const list = () => (
     <Box
-      sx={{ width: 250 }}
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
+      sx={{backgroundColor: '#01579b', height: '100%', width: '60vw'}}
     >
       <List>
         <Link href="/">
-          <ListItem key="home" disablePadding>
+          <ListItem key="home" disablePadding sx={{backgroundColor: '#0061ad', mb: '4px'}}>
             <ListItemButton>
               <ListItemIcon>
-                <HomeIcon />
+                <HomeIcon sx={{fill: '#fff'} }/>
               </ListItemIcon>
-              <ListItemText primary="Domů" />
+              <ListItemText primary="Domů"  sx={{color: '#fff'}}/>
             </ListItemButton>
           </ListItem>
         </Link>
         <Link href="/my">
-          <ListItem key="myWork" disablePadding>
+          <ListItem key="myWork" disablePadding sx={{backgroundColor: '#0061ad', mb: '4px'}}>
             <ListItemButton>
               <ListItemIcon>
-                <GradeIcon />
+                <GradeIcon sx={{fill: '#fff'} }/>
               </ListItemIcon>
-              <ListItemText primary="Moje brigády" />
+              <ListItemText primary="Moje brigády"  sx={{color: '#fff'}}/>
             </ListItemButton>
           </ListItem>
         </Link>
-      </List>
-      <Divider />
       { state.user ? (
-        <List>
-          <ListItem key="logout" disablePadding>
+          <ListItem key="logout" disablePadding sx={{backgroundColor: '#0061ad'}}>
             <ListItemButton>
               <ListItemIcon>
-                <LogoutIcon />
+                <LogoutIcon sx={{fill: '#fff'} }/>
               </ListItemIcon>
               <ListItemText
                 primary="Odhlásit se"
@@ -84,40 +81,44 @@ export default function Layout({ children }: { children: any }) {
                   setState((state) => ({...state, user: null}));
                   push("/");
                 }}
+                sx={{color: '#fff'}}
               />
             </ListItemButton>
           </ListItem>
-        </List>
       ) : (
-        <List>
-          <ListItem key="login" disablePadding>
+          <>
+          <ListItem key="login" disablePadding sx={{backgroundColor: '#0061ad', mb: '4px'}}>
             <ListItemButton>
               <ListItemIcon>
-                <LogoutIcon />
+                <LogoutIcon sx={{fill: '#fff'} }/>
               </ListItemIcon>
               <ListItemText
                 primary="Přihlásit se"
+                color={'white'}
                 onClick={() => {
                   push("/login");
                 }}
+                sx={{color: '#fff'}}
               />
             </ListItemButton>
           </ListItem>
-          <ListItem key="register" disablePadding>
+          <ListItem key="register" disablePadding sx={{backgroundColor: '#0061ad'}}>
             <ListItemButton>
               <ListItemIcon>
-                <AppRegistrationOutlined />
+                <AppRegistrationOutlined sx={{fill: '#fff'} }/>
               </ListItemIcon>
               <ListItemText
                 primary="Registrace"
                 onClick={() => {
                   push("/register");
                 }}
+                sx={{color: '#fff'}}
               />
             </ListItemButton>
           </ListItem>
-        </List>
+          </>
       )}
+      </List>
     </Box>
   );
 
