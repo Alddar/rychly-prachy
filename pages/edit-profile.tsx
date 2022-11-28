@@ -55,7 +55,7 @@ export default function Profile() {
         }
         
         setError(undefined);
-        setEditedUser(new User(state.user.id, email, password, phoneNumber,new Address(  street, city,  postCode)))
+        setEditedUser(new User(state.user.id, email, password, "+420 " + phoneNumber, new Address(street, city, postCode)))
         nextStep();
       };
 
@@ -102,12 +102,12 @@ export default function Profile() {
                         fullWidth
                         name="phoneNumber"
                         label="Telefonní číslo"
-                        type="number"
+                        type="string"
                         id="phoneNumber"
                         InputProps={{
-                        startAdornment: <InputAdornment position="start">+420</InputAdornment>,
+                            startAdornment: <InputAdornment position="start">+420</InputAdornment>,
                         }}
-                        defaultValue={state.user?.phone}
+                        defaultValue={state.user?.phone?.replace("+420", "")}
                     />
                     <TextField
                         margin="normal"

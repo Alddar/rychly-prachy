@@ -16,11 +16,11 @@ function generatePraguePosition(): LatLngExpression {
 
 export const userList: User[] = [
     new User(
-      uuidv4(),
-      "admin",
-      "admin",
-      "",
-      new Address("", "", "")
+        uuidv4(),
+        "admin",
+        "admin",
+        "+420 987 654 321",
+        new Address("Thákurova 9", "Praha", "160 00")
     )
 ]
 
