@@ -24,12 +24,9 @@ export default function WorkCard({ offer }: WorkCardProps) {
         <Box>
           <Typography
             variant="h6"
-            fontWeight={600}
             color={"#01579b"}
             gutterBottom
-            sx={{
-              fontWeight: offer.status === OfferStatus.TAKEN ? "bold" : "",
-            }}
+            fontWeight={400}
           >
             {offer.title}
           </Typography>
