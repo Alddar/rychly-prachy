@@ -101,7 +101,7 @@ export default function My() {
                 return true;
               })
               .map((offer) => (
-                  <Link href={`/offer/${offer.id}`} key={`work-card-${offer.id}`}>
+                  <Link href={`/offer/${offer.id}/rating`} key={`work-card-rating-${offer.id}`}>
                     <WorkCard offer={offer} />
                   </Link>
               ))}

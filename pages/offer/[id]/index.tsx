@@ -3,12 +3,12 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
 import { useContext, useState } from "react";
-import WorkCard from "../../components/complex/WorkCard";
+import WorkCard from "../../../components/complex/WorkCard";
 import { DateTime } from "luxon";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import { LatLngExpression } from "leaflet";
-import Map from "../../components/map";
+import Map from "../../../components/map";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import StarIcon from "@mui/icons-material/StarOutlined";
@@ -16,8 +16,8 @@ import MailIcon from "@mui/icons-material/MailOutline";
 import PhoneIcon from "@mui/icons-material/Phone";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { getOffer, getProvider, offerList } from "../../fixtures/app";
-import { StateContext } from "../_app";
+import { getOffer, getProvider, offerList } from "../../../fixtures/app";
+import { StateContext } from "../../_app";
 import { useRouter } from "next/router";
 
 export function getStaticPaths() {
