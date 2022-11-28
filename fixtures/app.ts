@@ -1,6 +1,6 @@
 import {DateTime} from "luxon";
 import {LatLngExpression} from "leaflet";
-import { Offer, Provider } from "../models/app";
+import {Address, Offer, OfferStatus, Provider, User} from "../models/app";
 
 function getRandomFloat(min: number, max: number, decimals: number) {
     const str = (Math.random() * (max - min) + min).toFixed(decimals);
@@ -12,6 +12,16 @@ function generatePraguePosition(): LatLngExpression {
     return [getRandomFloat(49.95, 50.10, 6),
         getRandomFloat(14.30, 14.60, 6)];
 }
+
+export const userList: User[] = [
+    new User(
+        1,
+        "admin",
+        "admin",
+        "",
+        new Address("", "", "")
+    )
+]
 
 export const providerList: Provider[] = [
     {
@@ -66,7 +76,8 @@ export const offerList: Offer[] = [
         price: 500,
         duration: 2,
         ownerId: 1,
-        interested: false
+        status: OfferStatus.TAKEN,
+        interested: userList[0]
     },
     {
         id: 2,
@@ -81,7 +92,8 @@ export const offerList: Offer[] = [
         price: 100,
         duration: 6,
         ownerId: 3,
-        interested: false
+        status: OfferStatus.COMPLETED,
+        interested: userList[0]
     },
     {
         id: 3,
@@ -96,7 +108,7 @@ export const offerList: Offer[] = [
         price: 90,
         duration: 3,
         ownerId: 1,
-        interested: false
+        status: OfferStatus.FREE,
     }
 ]
 

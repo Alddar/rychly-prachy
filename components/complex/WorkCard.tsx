@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import { Offer } from "../../models/app";
+import {Offer, OfferStatus} from "../../models/app";
 
 export type WorkCardProps = {
   offer: Offer
@@ -22,7 +22,7 @@ export default function WorkCard({
       >
         <Box>
           <Typography variant="h5" gutterBottom sx={{
-              fontWeight: offer.interested ? "bold" : ""
+              fontWeight: offer.status === OfferStatus.TAKEN ? "bold" : ""
           }}>
             {offer.title}
           </Typography>

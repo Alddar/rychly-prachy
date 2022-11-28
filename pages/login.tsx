@@ -15,6 +15,8 @@ import Image from "next/image";
 import logo from "../public/img/logo.png";
 import { useContext, useEffect } from "react";
 import { StateContext } from "./_app";
+import {Address, User} from "../models/app";
+import {userList} from "../fixtures/app";
 
 function Copyright(props: any) {
   return (
@@ -61,14 +63,19 @@ export default function SignIn() {
       return;
     }
 
-    if (email != "admin" || password != "admin") {
+    const user = userList.find((user) => user.email === email && user.password === password)
+
+    if (!user) {
       setError(
         "Zadali jste špatné přihlašovací údaje. (Použijte testovací: admin/admin)"
       );
       return;
     }
 
-    setState((state) => ({ ...state, user: { email: "admin", phone: "", address: {street: "", city: "", postCode: ""} }}));
+    setState((state) => ({
+      ...state,
+      user: user
+    }));
     push("/");
   };
 

@@ -1,17 +1,15 @@
 import { DateTime } from "luxon";
 import {LatLngExpression} from "leaflet";
 
-export interface Provider {
-    id: number;
+export interface Provider extends Person{
     name: string;
-    email: string;
-    phone: string;
-    address: {
-        street: string;
-        city: string;
-        postCode: string;
-    }
     rating: number;
+}
+
+export enum OfferStatus {
+    FREE = "free",
+    TAKEN = "taken",
+    COMPLETED = "completed",
 }
 
 export interface Offer {
@@ -26,15 +24,41 @@ export interface Offer {
     distance: number;
     date: DateTime;
     ownerId: number;
-    interested: boolean
+    status: OfferStatus;
+    interested?: User
 }
 
-export interface User {
+export class Address {
+    street: string;
+    city: string;
+    postCode: string;
+
+    constructor(street: string, city: string, postCode: string) {
+        this.street = street;
+        this.city = city;
+        this.postCode = postCode;
+    }
+}
+
+export interface Person {
+    id: number;
     email: string
     phone: string
-    address: {
-        street: string;
-        city: string;
-        postCode: string;
+    address: Address
+}
+
+export class User implements Person {
+    password: string;
+    address: Address;
+    email: string;
+    id: number;
+    phone: string;
+
+    constructor(id: number, email: string, password: string, phone: string, address: Address) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.address = address;
     }
 }

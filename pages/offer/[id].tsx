@@ -39,17 +39,21 @@ export default function Offer() {
     const router = useRouter()
     const { id } = router.query
     const offer = getOffer(state.offerList, Number(`${id}`));
-    const user = getProvider(state.providerList, offer.ownerId)
+    const provider = getProvider(state.providerList, offer.ownerId)
 
     const position: LatLngExpression = offer.position;
 
     function handleInterest() {
-        offer.interested = true
+        if (!state.user) {
+            console.log("Not logged in");
+            return;
+        }
+        offer.interested = state.user
         setOffer(offer)
     }
 
     function handleCancelInterest() {
-        offer.interested = false
+        offer.interested = undefined
         setOffer(offer)
     }
 
@@ -89,9 +93,9 @@ export default function Offer() {
                 <Box sx={{ display: "flex" }}>
                 <Avatar sx={{ bgcolor: "#fb3", marginRight: "1rem" }}>M</Avatar>
                 <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <Typography>{user.name}</Typography>
+                    <Typography>{provider.name}</Typography>
                     <Typography variant="caption">
-                    {user.rating} <StarIcon sx={{ fontSize: 11 }} />
+                    {provider.rating} <StarIcon sx={{ fontSize: 11 }} />
                     </Typography>
                 </Box>
                 </Box>
@@ -105,9 +109,9 @@ export default function Offer() {
                 <List disablePadding>
                 <ListItem disablePadding>
                     <Typography variant="h6">
-                    {user.name}{" "}
+                    {provider.name}{" "}
                     <Typography variant="caption">
-                        {user.rating} <StarIcon sx={{ fontSize: 11 }} />
+                        {provider.rating} <StarIcon sx={{ fontSize: 11 }} />
                     </Typography>
                     </Typography>
                 </ListItem>
@@ -115,13 +119,13 @@ export default function Offer() {
                     <ListItemIcon>
                     <MailIcon />
                     </ListItemIcon>
-                    <ListItemText primary={user.email} />
+                    <ListItemText primary={provider.email} />
                 </ListItem>
                 <ListItem disablePadding>
                     <ListItemIcon>
                     <PhoneIcon />
                     </ListItemIcon>
-                    <ListItemText primary={user.phone} />
+                    <ListItemText primary={provider.phone} />
                 </ListItem>
                 </List>
                 <Button variant="contained" color="error" onClick={handleCancelInterest}>

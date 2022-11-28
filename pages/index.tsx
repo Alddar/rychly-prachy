@@ -22,6 +22,7 @@ import { defaultFilterState, Filter, FilterState } from "../components/complex/F
 import diacritics from "diacritics";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import {OfferStatus} from "../models/app";
 
 export default function Home() {
   const { state, setState } = useContext(StateContext);
@@ -170,6 +171,7 @@ export default function Home() {
             )
           : state.offerList
         )
+          .filter((offer) => offer.status === OfferStatus.FREE)
           .filter((offer) => {
             const {
               search,

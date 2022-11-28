@@ -59,14 +59,16 @@ export default function Layout({ children }: { children: any }) {
             </ListItemButton>
           </ListItem>
         </Link>
-        <ListItem key="myWork" disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <GradeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Moje brigády" />
-          </ListItemButton>
-        </ListItem>
+        <Link href="/my">
+          <ListItem key="myWork" disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <GradeIcon />
+              </ListItemIcon>
+              <ListItemText primary="Moje brigády" />
+            </ListItemButton>
+          </ListItem>
+        </Link>
       </List>
       <Divider />
       { state.user ? (
