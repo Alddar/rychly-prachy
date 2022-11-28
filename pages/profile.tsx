@@ -15,6 +15,7 @@ import { useContext, useEffect } from "react";
 import { StateContext } from "./_app";
 import { Email, Home, PhoneIphone } from "@mui/icons-material";
 import ReturnBackButton from "../components/complex/ReturnBackButton";
+import Divider from "@mui/material/Divider";
 
 export default function Profile() {
   const StyledTypographyBody = (props: any) => (
@@ -101,6 +102,8 @@ export default function Profile() {
             </Box>
           </Dialog>
         </Box>
+        <Divider />
+        <Box bgcolor={'#e1f5fe'} py={'12px'} borderRadius={'16px'}>
         <Box sx={{ ml: "2rem" }}>
           <Stack direction={"row"} spacing={1} alignItems={"center"}>
             <Email color={"primary"} />
@@ -139,18 +142,18 @@ export default function Profile() {
             {state.user?.address.postCode} {state.user?.address.city}
           </StyledTypographyBody>
         </Box>
-
+        </Box>
         <Box sx={{ display: "flex", justifyContent: "right" }}>
           <IconButton
-            onClick={editProfile}
-            size="large"
-            sx={{
-              bgcolor: "primary.main",
-              color: "#FFF",
-              "&:hover": {
-                backgroundColor: "primary.dark",
-              },
-            }}
+              onClick={editProfile}
+              size="large"
+              sx={{
+                bgcolor: "primary.main",
+                color: "#FFF",
+                "&:hover": {
+                  backgroundColor: "primary.dark",
+                },
+              }}
           >
             <EditIcon />
           </IconButton>
