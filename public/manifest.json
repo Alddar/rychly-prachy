@@ -3,8 +3,8 @@
   "short_name": "RP",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "sizes": "16x16",
+      "src": "/img/icon-225x225.png",
+      "sizes": "225x225",
       "type": "image/png",
       "purpose": "any maskable"
     }
