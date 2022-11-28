@@ -9,27 +9,30 @@ import {
   MenuItem,
   Select,
   Stack,
-  Typography,
 } from "@mui/material";
 import TextField from "@mui/material/TextField";
-import { FilterAltOutlined, Search, Sort } from "@mui/icons-material";
+import { FilterAltOutlined, Search } from "@mui/icons-material";
 import PageTitle from "../components/PageTitle";
 import * as React from "react";
+import { useContext, useState } from "react";
 import Link from "next/link";
 import { StateContext } from "./_app";
-import { useContext, useEffect, useState } from "react";
-import { defaultFilterState, Filter, FilterState } from "../components/complex/Filter";
+import {
+  defaultFilterState,
+  Filter,
+  FilterState,
+} from "../components/complex/Filter";
 import diacritics from "diacritics";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import {OfferStatus} from "../models/app";
+import { OfferStatus } from "../models/app";
 
 export default function Home() {
   const { state, setState } = useContext(StateContext);
   const [filterState, setFilterState] = useState({
     menuOpen: false,
     search: "",
-    sort: '',
+    sort: "",
     sortDirection: true,
     filters: defaultFilterState,
   });
@@ -40,6 +43,7 @@ export default function Home() {
       filters: { ...state.filters, ...newState },
     }));
 
+  // @ts-ignore
   return (
     <>
       <Drawer
@@ -139,7 +143,7 @@ export default function Home() {
               onChange={(e) =>
                 setFilterState((state) => ({
                   ...state,
-                  sort: e.target.value || '',
+                  sort: e.target.value || "",
                 }))
               }
             >
@@ -163,11 +167,12 @@ export default function Home() {
           )}
         </Stack>
       </Stack>
-      <Stack spacing={2}>
+      <Stack spacing={2} mb={"2em"}>
         {(filterState.sort
-          ? [...state.offerList].sort((a, b) =>
-              // @ts-ignore
-              (filterState.sortDirection ? 1 : -1) * (a[filterState.sort] > b[filterState.sort] ? 1 : -1)
+          ? [...state.offerList].sort(
+              (a, b) =>
+                // @ts-ignore
+                (filterState.sortDirection ? 1 : -1) * (a[filterState.sort] > b[filterState.sort] ? 1 : -1)
             )
           : state.offerList
         )

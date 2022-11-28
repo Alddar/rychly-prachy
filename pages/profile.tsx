@@ -14,6 +14,7 @@ import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import { StateContext } from "./_app";
 import { Email, Home, PhoneIphone } from "@mui/icons-material";
+import ReturnBackButton from "../components/complex/ReturnBackButton";
 
 export default function Profile() {
   const StyledTypographyBody = (props: any) => (
@@ -51,6 +52,7 @@ export default function Profile() {
 
   return (
     <Stack>
+      <ReturnBackButton />
       <PageTitle>Profil uživatele</PageTitle>
       <Stack spacing={3}>
         <Box
