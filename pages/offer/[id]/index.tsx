@@ -20,6 +20,7 @@ import {StateContext} from "../../_app";
 import {useRouter} from "next/router";
 import {OfferStatus} from "../../../models/app";
 import Link from "next/link";
+import MuiLink from '@mui/material/Link';
 import RatingIcon from "../../../components/complex/RatingIcon";
 
 export function getStaticPaths() {
@@ -90,21 +91,29 @@ export default function Offer() {
             )}
             </Map>
             {!offer.interested ? (
-            <>
-                <Typography variant="h5">Zadavatel</Typography>
-                <Box sx={{ display: "flex" }}>
-                <Avatar sx={{ bgcolor: "#fb3", marginRight: "1rem" }}>M</Avatar>
-                <Box sx={{ display: "flex", flexDirection: "column" }}>
-                    <Typography>{provider.name}</Typography>
-                    <Typography variant="caption">
-                    {provider.rating} <StarIcon sx={{ fontSize: 11 }} />
-                    </Typography>
-                </Box>
-                </Box>
-                <Button variant="contained" onClick={handleInterest}>
-                Projevit zájem a získat kontakt
-                </Button>
-            </>
+                <>
+                    <Typography variant="h5">Zadavatel</Typography>
+                    <Box sx={{display: "flex"}}>
+                        <Avatar sx={{bgcolor: "#fb3", marginRight: "1rem"}}>M</Avatar>
+                        <Box sx={{display: "flex", flexDirection: "column"}}>
+                            <Typography>{provider.name}</Typography>
+                            <Typography variant="caption">
+                                {provider.rating} <StarIcon sx={{fontSize: 11}}/>
+                            </Typography>
+                        </Box>
+                    </Box>
+                    {!state.user ? (
+                        <MuiLink href="/login" component={Link}>
+                            <Typography>
+                                Pro zájem o nabídku se musíte nejdříve přihlásit.
+                            </Typography>
+                        </MuiLink>
+                    ) : (
+                        <Button variant="contained" onClick={handleInterest}>
+                            Projevit zájem a získat kontakt
+                        </Button>
+                    )}
+                </>
             ) : (
             <>
                 <Typography variant="h5">Kontakt</Typography>
