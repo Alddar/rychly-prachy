@@ -77,7 +77,7 @@ export const offerList: Offer[] = [
         price: 500,
         duration: 2,
         ownerId: providerList[0].id,
-        status: OfferStatus.TAKEN,
+        status: OfferStatus.COMPLETED,
         interested: userList[0]
     },
     {
@@ -93,8 +93,7 @@ export const offerList: Offer[] = [
         price: 100,
         duration: 6,
         ownerId: providerList[2].id,
-        status: OfferStatus.COMPLETED,
-        interested: userList[0]
+        status: OfferStatus.FREE,
     },
     {
         id: 3,

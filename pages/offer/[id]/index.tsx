@@ -139,7 +139,7 @@ export default function Offer() {
                         <ListItemText primary={provider.phone}/>
                     </ListItem>
                 </List>
-                {offer.status === OfferStatus.FREE &&
+                {offer.status === OfferStatus.FREE || offer.status === OfferStatus.TAKEN &&
                     <Button variant="contained" color="error" onClick={handleCancelInterest}>
                         Zrušit zájem
                     </Button>

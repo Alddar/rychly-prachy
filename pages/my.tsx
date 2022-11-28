@@ -21,8 +21,8 @@ export default function My() {
   });
 
   const myOffers = state.offerList.filter((offer) => offer.interested && offer.interested.id === state.user?.id);
-  const myPendingOffers = myOffers.filter((offer) => offer.status === OfferStatus.TAKEN);
   const myCompletedOffers = myOffers.filter((offer) => offer.status === OfferStatus.COMPLETED);
+  const myPendingOffers = myOffers.filter((offer) => offer.interested === state.user && !myCompletedOffers.includes(offer));
 
   useEffect(() => {
     if (state.user === null) {
