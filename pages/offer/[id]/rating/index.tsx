@@ -9,7 +9,7 @@ import {useRouter} from "next/router";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import {RatingIcon, ratingIcons} from "./ratingIcon";
+import RatingIcon, {ratingIcons} from "../../../../components/complex/RatingIcon";
 import Link from "next/link";
 import * as React from "react";
 

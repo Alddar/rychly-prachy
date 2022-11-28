@@ -41,17 +41,17 @@ export const ratingIcons: {
     },
 };
 
-export function RatingIcon({rating, selected = true}: { rating: number, selected?: boolean }) {
-    const customIcon = ratingIcons[rating]
-    const Icon = customIcon.icon
+ export default function RatingIcon({rating, selected = true}: { rating: number, selected?: boolean }) {
+     const customIcon = ratingIcons[rating]
+     const Icon = customIcon.icon
 
-    return (
-        <Icon
-            color={customIcon.color}
-            sx={{
-                fontSize: "4rem",
-                color: !selected ? "gray" : ""
-            }}
+     return (
+         <Icon
+             color={customIcon.color}
+             sx={{
+                 fontSize: "4rem",
+                 color: !selected ? "gray" : ""
+             }}
         />
     )
 }

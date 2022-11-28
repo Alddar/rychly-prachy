@@ -20,7 +20,7 @@ import {StateContext} from "../../_app";
 import {useRouter} from "next/router";
 import {OfferStatus} from "../../../models/app";
 import Link from "next/link";
-import {RatingIcon} from "./rating/ratingIcon";
+import RatingIcon from "../../../components/complex/RatingIcon";
 
 export function getStaticPaths() {
     return {
