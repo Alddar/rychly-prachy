@@ -24,7 +24,8 @@ import MuiLink from "@mui/material/Link";
 import RatingIcon from "../../../components/complex/RatingIcon";
 import { Alert } from "@mui/material";
 import ReturnBackButton from "../../../components/complex/ReturnBackButton";
-import { ArrowRight, Check } from "@mui/icons-material";
+import {ArrowRight, Check, PhoneIphone} from "@mui/icons-material";
+import Divider from "@mui/material/Divider";
 
 export function getStaticPaths() {
   return {
@@ -64,11 +65,17 @@ export default function Offer() {
   }
 
   return (
-    <Container maxWidth="sm" sx={{ paddingBottom: "2rem" }}>
+    <Container maxWidth="sm" sx={{ paddingBottom: "2rem", px: 0 }}>
       <ReturnBackButton />
-      <Stack spacing={3}>
+      <Stack spacing={3} >
         <WorkCard offer={offer}></WorkCard>
-        <Typography>{offer.description}</Typography>
+        <Box bgcolor={'#e1f5fe'} p={'12px'}>
+          <Typography variant="h5" color={"#01579b"} mb={'8px'}>
+            Popis
+          </Typography>
+          <Typography variant={'body1'} >{offer.description}</Typography>
+        </Box>
+        <Box bgcolor={'#e1f5fe'} p={'12px'}>
         <Typography variant="h5" color={"#01579b"}>
           Požadavky
         </Typography>
@@ -77,7 +84,6 @@ export default function Offer() {
             <ListItem
               disablePadding
               key={`offer-${offer.id}-requirement-${i}`}
-              divider
             >
               <ListItemIcon>
                 <ArrowRight />
@@ -86,6 +92,7 @@ export default function Offer() {
             </ListItem>
           ))}
         </List>
+        </Box>
         <Typography variant="h5" color={"#01579b"}>
           Lokalita
         </Typography>
@@ -107,17 +114,19 @@ export default function Offer() {
         </Map>
         {!offer.interested ? (
           <>
-            <Typography variant="h5" color={"#01579b"}>
+            <Box bgcolor={'#e1f5fe'} p={'12px'}>
+            <Typography variant="h5" color={"#01579b"} mb={'8px'}>
               Zadavatel
             </Typography>
             <Box sx={{ display: "flex" }}>
-              <Avatar sx={{ bgcolor: "#fb3", marginRight: "1rem" }}>M</Avatar>
+              <Avatar sx={{ bgcolor: "#fb3", marginRight: "1rem", border: '1px solid #b3e5fc', backgroundColor: '#039be5' }} />
               <Box sx={{ display: "flex", flexDirection: "column" }}>
                 <Typography>{provider.name}</Typography>
                 <Typography variant="caption">
                   {provider.rating} <StarIcon sx={{ fontSize: 11 }} />
                 </Typography>
               </Box>
+            </Box>
             </Box>
             {!state.user ? (
               <MuiLink href="/login" component={Link}>
@@ -133,10 +142,12 @@ export default function Offer() {
           </>
         ) : (
           <>
-            <Typography variant="h5">Kontakt</Typography>
+          <Box bgcolor={'#e1f5fe'} p={'12px'}>
+            <Typography variant="h5" color={'#01579b'}>Kontakt</Typography>
+            <Divider/>
             <List disablePadding>
               <ListItem disablePadding>
-                <Typography variant="h6">
+                <Typography variant="h6" mt={'6px'} color={'#01579b'} fontWeight={500}>
                   {provider.name}{" "}
                   <Typography variant="caption">
                     {provider.rating} <StarIcon sx={{ fontSize: 11 }} />
@@ -145,17 +156,18 @@ export default function Offer() {
               </ListItem>
               <ListItem disablePadding>
                 <ListItemIcon>
-                  <MailIcon />
+                  <MailIcon color={'primary'} />
                 </ListItemIcon>
                 <ListItemText primary={provider.email} />
               </ListItem>
               <ListItem disablePadding>
                 <ListItemIcon>
-                  <PhoneIcon />
+                  <PhoneIphone color={'primary'} />
                 </ListItemIcon>
                 <ListItemText primary={provider.phone} />
               </ListItem>
             </List>
+          </Box>
             {offer.status === OfferStatus.FREE && (
               <Button
                 variant="contained"
