@@ -82,7 +82,7 @@ export default function Profile() {
     setTimeout(() => {
       setState((state) => ({
         ...state,
-        user: new User(uuidv4(), email, phone, password, new Address("", "", ""))
+        user: new User(uuidv4(), email, "+420 " + phone, password, new Address("", "", ""))
       }));
       push("/");
     }, 5000);
@@ -122,14 +122,14 @@ export default function Profile() {
             id="passwordRepeat"
           />
           <TextField
-            margin="normal"
-            required
-            fullWidth
-            name="phoneNumber"
-            label="Telefonní číslo"
-            type="number"
-            id="phoneNumber"
-            InputProps={{
+              margin="normal"
+              required
+              fullWidth
+              name="phoneNumber"
+              label="Telefonní číslo"
+              type="string"
+              id="phoneNumber"
+              InputProps={{
               startAdornment: (
                 <InputAdornment position="start">+420</InputAdornment>
               ),
