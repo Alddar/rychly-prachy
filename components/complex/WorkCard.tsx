@@ -2,49 +2,54 @@ import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import {Offer, OfferStatus} from "../../models/app";
+import { Offer, OfferStatus } from "../../models/app";
 
 export type WorkCardProps = {
-    offer: Offer
+  offer: Offer;
 };
 
-export default function WorkCard({
-                                     offer
-                                 }: WorkCardProps) {
-    return (
-        <Card sx={{minWidth: 275}}>
-            <CardContent
-                sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                }}
-            >
-                <Box>
-                    <Typography variant="h5" gutterBottom sx={{
-                        fontWeight: offer.status === OfferStatus.TAKEN ? "bold" : ""
-                    }}>
-                        {offer.title}
-                    </Typography>
-                    <Typography variant="subtitle2" component="div">
-                        {offer.distance} km
-                    </Typography>
-                    <Typography variant="subtitle2" color="text.secondary">
-                        {offer.location}
-                    </Typography>
-                </Box>
-                <Box>
-                    <Typography variant="h5" gutterBottom>
-                        <div suppressHydrationWarning={true}>{offer.date.toLocaleString()}</div>
-                    </Typography>
-                    <Typography variant="subtitle2" component="div">
-                        {offer.price} Kč
-                    </Typography>
-                    <Typography variant="subtitle2" color="text.secondary">
-                        {offer.duration} h
-                    </Typography>
-                </Box>
-            </CardContent>
-        </Card>
-    );
+export default function WorkCard({ offer }: WorkCardProps) {
+  return (
+    <Card sx={{ minWidth: 275 }} variant={"outlined"}>
+      <CardContent
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "space-between",
+          width: "100%",
+          backgroundColor: "#e1f5fe",
+          alignItems: "baseline",
+        }}
+      >
+        <Box>
+          <Typography
+            variant="h6"
+            fontWeight={600}
+            color={"#01579b"}
+            gutterBottom
+            sx={{
+              fontWeight: offer.status === OfferStatus.TAKEN ? "bold" : "",
+            }}
+          >
+            {offer.title}
+          </Typography>
+          <Typography variant="subtitle2" component="div" fontStyle={"italic"}>
+            {offer.distance} km
+          </Typography>
+          <Typography variant="subtitle2">{offer.location}</Typography>
+        </Box>
+        <Box textAlign={"right"} justifyContent={"flex-end"}>
+          <Typography variant="subtitle2" gutterBottom whiteSpace={"nowrap"}>
+            <div suppressHydrationWarning={true}>
+              {offer.date.toLocaleString()}
+            </div>
+          </Typography>
+          <Typography variant="subtitle2" component="div">
+            {offer.price} Kč/hod
+          </Typography>
+          <Typography variant="subtitle2">{offer.duration}h</Typography>
+        </Box>
+      </CardContent>
+    </Card>
+  );
 }
