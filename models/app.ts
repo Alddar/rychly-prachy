@@ -25,7 +25,8 @@ export interface Offer {
     date: DateTime;
     ownerId: string;
     status: OfferStatus;
-    interested?: User
+    interested?: User;
+    rating?: number;
 }
 
 export class Address {

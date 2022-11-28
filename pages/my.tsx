@@ -10,6 +10,7 @@ import {StateContext} from "./_app";
 import diacritics from "diacritics";
 import {useRouter} from "next/router";
 import {OfferStatus} from "../models/app";
+import Button from "@mui/material/Button";
 
 export default function My() {
   const { state } = useContext(StateContext);
@@ -101,9 +102,18 @@ export default function My() {
                 return true;
               })
               .map((offer) => (
-                  <Link href={`/offer/${offer.id}/rating`} key={`work-card-rating-${offer.id}`}>
-                    <WorkCard offer={offer} />
-                  </Link>
+                  <Box key={`work-card-rating-${offer.id}`}>
+                      <Link href={`/offer/${offer.id}`}>
+                          <WorkCard offer={offer}/>
+                      </Link>
+                      {offer.status === OfferStatus.COMPLETED && !offer.rating &&
+                          <Link href={`/offer/${offer.id}/rating`} key={`work-card-rating-${offer.id}`}>
+                              <Button variant="contained" color="warning" style={{width: "100%"}}>
+                                  Ohodnotit
+                              </Button>
+                          </Link>
+                      }
+                  </Box>
               ))}
         </Stack>
       </Box>

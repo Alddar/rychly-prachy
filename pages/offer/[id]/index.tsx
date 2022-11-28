@@ -2,12 +2,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import Stack from "@mui/material/Stack";
-import { useContext, useState } from "react";
+import {useContext} from "react";
 import WorkCard from "../../../components/complex/WorkCard";
-import { DateTime } from "luxon";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import { LatLngExpression } from "leaflet";
+import {LatLngExpression} from "leaflet";
 import Map from "../../../components/map";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -16,22 +15,25 @@ import MailIcon from "@mui/icons-material/MailOutline";
 import PhoneIcon from "@mui/icons-material/Phone";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { getOffer, getProvider, offerList } from "../../../fixtures/app";
-import { StateContext } from "../../_app";
-import { useRouter } from "next/router";
+import {getOffer, getProvider, offerList} from "../../../fixtures/app";
+import {StateContext} from "../../_app";
+import {useRouter} from "next/router";
+import {OfferStatus} from "../../../models/app";
+import Link from "next/link";
+import {RatingIcon} from "./rating/ratingIcon";
 
 export function getStaticPaths() {
     return {
-        paths: offerList.map((offer) => ({ params: { id: `${offer.id}` } })),
+        paths: offerList.map((offer) => ({params: {id: `${offer.id}`}})),
         fallback: false
     }
 }
 
 export async function getStaticProps() {
-  return {
-    // Passed to the page component as props
-    props: { },
-  }
+    return {
+        // Passed to the page component as props
+        props: {},
+    }
 }
 
 export default function Offer() {
@@ -107,30 +109,44 @@ export default function Offer() {
             <>
                 <Typography variant="h5">Kontakt</Typography>
                 <List disablePadding>
-                <ListItem disablePadding>
-                    <Typography variant="h6">
-                    {provider.name}{" "}
-                    <Typography variant="caption">
-                        {provider.rating} <StarIcon sx={{ fontSize: 11 }} />
-                    </Typography>
-                    </Typography>
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemIcon>
-                    <MailIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={provider.email} />
-                </ListItem>
-                <ListItem disablePadding>
-                    <ListItemIcon>
-                    <PhoneIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={provider.phone} />
-                </ListItem>
+                    <ListItem disablePadding>
+                        <Typography variant="h6">
+                            {provider.name}{" "}
+                            <Typography variant="caption">
+                                {provider.rating} <StarIcon sx={{fontSize: 11}}/>
+                            </Typography>
+                        </Typography>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemIcon>
+                            <MailIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={provider.email}/>
+                    </ListItem>
+                    <ListItem disablePadding>
+                        <ListItemIcon>
+                            <PhoneIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={provider.phone}/>
+                    </ListItem>
                 </List>
-                <Button variant="contained" color="error" onClick={handleCancelInterest}>
-                    Zrušit zájem
-                </Button>
+                {offer.status === OfferStatus.FREE &&
+                    <Button variant="contained" color="error" onClick={handleCancelInterest}>
+                        Zrušit zájem
+                    </Button>
+                }
+                {offer.status === OfferStatus.COMPLETED &&
+                    (!offer.rating ? <Link href={`/offer/${offer.id}/rating`} key={`work-card-rating-${offer.id}`}>
+                                <Button variant="contained" color="primary">
+                                    Ohodnotit
+                                </Button>
+                            </Link> :
+                            <>
+                                <Typography variant="h5">Hodnocení</Typography>
+                                <RatingIcon rating={offer.rating}/>
+                            </>
+                    )
+                }
             </>
             )}
         </Stack>
