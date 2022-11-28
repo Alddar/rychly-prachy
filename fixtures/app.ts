@@ -1,6 +1,7 @@
 import {DateTime} from "luxon";
 import {LatLngExpression} from "leaflet";
 import {Address, Offer, OfferStatus, Provider, User} from "../models/app";
+import {v4 as uuidv4} from 'uuid';
 
 function getRandomFloat(min: number, max: number, decimals: number) {
     const str = (Math.random() * (max - min) + min).toFixed(decimals);
@@ -15,17 +16,17 @@ function generatePraguePosition(): LatLngExpression {
 
 export const userList: User[] = [
     new User(
-        1,
-        "admin",
-        "admin",
-        "",
-        new Address("", "", "")
+      uuidv4(),
+      "admin",
+      "admin",
+      "",
+      new Address("", "", "")
     )
 ]
 
 export const providerList: Provider[] = [
     {
-        id: 1,
+        id: uuidv4(),
         name: "Jan Novák",
         email: "jan@novak.cz",
         phone: "+420 721 345 897",
@@ -37,7 +38,7 @@ export const providerList: Provider[] = [
         rating: 3.9
     },
     {
-        id: 2,
+        id: uuidv4(),
         name: "Václav Nejedlý",
         email: "vasicek1969@seznam.cz",
         phone: "+420 416 741 206",
@@ -49,7 +50,7 @@ export const providerList: Provider[] = [
         rating: 4.5
     },
     {
-        id: 3,
+        id: uuidv4(),
         name: "Evžena Lakatoška",
         email: "lakatoska@seznam.cz",
         phone: "+420 733 741 098",
@@ -67,7 +68,7 @@ export const offerList: Offer[] = [
         id: 1,
         title: "Sekání trávy",
         description:
-            "Potřebuju posekat trávu na pozemku o velkosti 20m x 10m. Spěchá!",
+          "Potřebuju posekat trávu na pozemku o velkosti 20m x 10m. Spěchá!",
         requirements: ["Znalost práce se sekačkou"],
         location: "Praha",
         distance: 3,
@@ -75,7 +76,7 @@ export const offerList: Offer[] = [
         position: [50.026372, 14.517759],
         price: 500,
         duration: 2,
-        ownerId: 1,
+        ownerId: providerList[0].id,
         status: OfferStatus.TAKEN,
         interested: userList[0]
     },
@@ -83,7 +84,7 @@ export const offerList: Offer[] = [
         id: 2,
         title: "Hlídání dětí",
         description:
-            "Potřebuju pohlídat děti, ale jakože co nejdřív, už mě fakt štvou.",
+          "Potřebuju pohlídat děti, ale jakože co nejdřív, už mě fakt štvou.",
         requirements: ["Zdravý selský rozum", "Znalost dětí", "Nebýt čorka"],
         location: "Praha",
         distance: 10,
@@ -91,7 +92,7 @@ export const offerList: Offer[] = [
         position: [50.020514, 14.499634],
         price: 100,
         duration: 6,
-        ownerId: 3,
+        ownerId: providerList[2].id,
         status: OfferStatus.COMPLETED,
         interested: userList[0]
     },
@@ -99,7 +100,7 @@ export const offerList: Offer[] = [
         id: 3,
         title: "Házení lopatou",
         description:
-            "Potřebuju někoho na přeházení uhlí, které mi přivezou",
+          "Potřebuju někoho na přeházení uhlí, které mi přivezou",
         requirements: ["Výdrž", "Mozek", "Nebýt čorka"],
         location: "Praha",
         distance: 10,
@@ -107,16 +108,16 @@ export const offerList: Offer[] = [
         position: [50.051647, 14.479273],
         price: 90,
         duration: 3,
-        ownerId: 1,
+        ownerId: providerList[1].id,
         status: OfferStatus.FREE,
     }
 ]
 
 
-export function getProvider(providerList: Provider[], id: number): Provider {
-    return providerList.find((x) => x.id == id) ?? providerList[0]
+export function getProvider(providerList: Provider[], id: string): Provider {
+    return providerList.find((x) => x.id === id) ?? providerList[0]
 }
 
 export function getOffer(offerList: Offer[], id: number): Offer {
-    return offerList.find((x) => x.id == id) ?? offerList[0]
+    return offerList.find((x) => x.id === id) ?? offerList[0]
 }

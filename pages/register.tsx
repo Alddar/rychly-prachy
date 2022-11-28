@@ -10,9 +10,12 @@ import Typography from "@mui/material/Typography";
 import * as React from "react";
 import PageTitle from "../components/PageTitle";
 import dynamic from "next/dynamic";
-import { useRouter } from "next/router";
-import { useContext } from "react";
-import { StateContext } from "./_app";
+import {useRouter} from "next/router";
+import {useContext} from "react";
+import {StateContext} from "./_app";
+import {Address, User} from "../models/app";
+import {v4 as uuidv4} from 'uuid';
+
 const ReactCodeInput = dynamic(import("react-code-input"));
 
 export default function Profile() {
@@ -20,11 +23,12 @@ export default function Profile() {
   const [currentStep, setCurrentStep] = React.useState<number>(0);
   const nextStep = () => setCurrentStep((step) => step + 1);
   const [pinValue, setPinValue] = React.useState<string>("");
-  const { push } = useRouter();
+  const {push} = useRouter();
   const [ageConfirmation, setAgeConfirmation] = React.useState<boolean>(false);
-  const { setState } = useContext(StateContext);
+  const {setState} = useContext(StateContext);
   const [email, setEmail] = React.useState<string>("");
   const [phone, setPhone] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -56,6 +60,7 @@ export default function Profile() {
 
     setEmail(email);
     setPhone(phoneNumber);
+    setPassword(password);
     setError(undefined);
     nextStep();
   };
@@ -75,7 +80,10 @@ export default function Profile() {
     setError(undefined);
     nextStep();
     setTimeout(() => {
-      setState((state) => ({...state, user: {email: email, phone: phone, address: {street: "", city: "", postCode: ""}}}));
+      setState((state) => ({
+        ...state,
+        user: new User(uuidv4(), email, phone, password, new Address("", "", ""))
+      }));
       push("/");
     }, 5000);
   };

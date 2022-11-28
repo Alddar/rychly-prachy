@@ -23,7 +23,7 @@ export interface Offer {
     position: LatLngExpression
     distance: number;
     date: DateTime;
-    ownerId: number;
+    ownerId: string;
     status: OfferStatus;
     interested?: User
 }
@@ -41,7 +41,7 @@ export class Address {
 }
 
 export interface Person {
-    id: number;
+    id: string;
     email: string
     phone: string
     address: Address
@@ -51,10 +51,10 @@ export class User implements Person {
     password: string;
     address: Address;
     email: string;
-    id: number;
+    id: string;
     phone: string;
 
-    constructor(id: number, email: string, password: string, phone: string, address: Address) {
+    constructor(id: string, email: string, password: string, phone: string, address: Address) {
         this.id = id;
         this.email = email;
         this.password = password;

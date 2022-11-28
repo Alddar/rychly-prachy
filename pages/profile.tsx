@@ -15,7 +15,7 @@ import { useContext, useEffect } from "react";
 import { StateContext } from "./_app";
 
 export default function Profile() {
-    const StyledTypographyBody = (props) => (
+    const StyledTypographyBody = (props: any) => (
         <Typography sx={{pl: '2rem'}}>   
           {props.children}
         </Typography>

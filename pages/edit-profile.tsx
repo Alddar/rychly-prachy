@@ -11,7 +11,7 @@ import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { useContext, useEffect } from "react";
 import { StateContext } from "./_app";
-import { User } from "../models/app";
+import {Address, User} from "../models/app";
 const ReactCodeInput = dynamic(import("react-code-input"));
 
 export default function Profile() {
@@ -31,6 +31,10 @@ export default function Profile() {
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+        if (state.user == null) {
+            return
+        }
+
         const data = new FormData(event.currentTarget);
         const email = data.get("email") as string;
         const password = data.get("password") as string;
@@ -51,7 +55,7 @@ export default function Profile() {
         }
         
         setError(undefined);
-        setEditedUser({email: email, phone: phoneNumber, address: {street: street, city: city, postCode: postCode}})
+        setEditedUser(new User(state.user.id, email, password, phoneNumber,new Address(  street, city,  postCode)))
         nextStep();
       };
 
