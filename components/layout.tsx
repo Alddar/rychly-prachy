@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: any }) {
 
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
-      console.log(event);
+      console.log("ToggleDrawer", event);
       if (
         event.type === "keydown" &&
         ((event as React.KeyboardEvent).key === "Tab" ||
@@ -129,12 +129,11 @@ export default function Layout({ children }: { children: any }) {
             color="inherit"
             aria-label="menu"
             sx={{ ml: 2 }}
+            onClick={() => {
+              push("/profile");
+            }}
           >
-            <AccountCircleIcon
-              onClick={() => {
-                push("/profile");
-              }}
-            />
+            <AccountCircleIcon />
           </IconButton>
           <div style={{ flexGrow: 1 }}></div>
           <React.Fragment key="menu">

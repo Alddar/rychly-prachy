@@ -35,7 +35,7 @@ export default function Profile() {
   const handleSubmit2 = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(pinValue);
+    console.log("Submit", pinValue);
     if (pinValue.length == 0) {
       setError("Je potřeba vyplnit pole.");
       return;

@@ -6,7 +6,7 @@ import type { AppProps } from "next/app";
 import Layout from "../components/layout";
 import createCache from "@emotion/cache";
 import { CacheProvider } from "@emotion/react";
-import { CssBaseline, ThemeProvider } from "@mui/material";
+import { CssBaseline } from "@mui/material";
 import { AdapterLuxon } from "@mui/x-date-pickers/AdapterLuxon";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import theme from "../styles/theme/theme";
@@ -20,6 +20,8 @@ import "../styles/global.css";
 import { createContext, useMemo, useState } from "react";
 import { Offer, Provider, User } from "../models/app";
 import { offerList, providerList } from "../fixtures/app";
+import { ThemeProvider } from "@mui/system";
+import Head from "next/head";
 
 const createEmotionCache = () => {
   return createCache({ key: "css", prepend: true });
@@ -49,17 +51,22 @@ export default function App({ Component, pageProps }: AppProps) {
 
 
   return (
-    <CacheProvider value={clientSideEmotioNCache}>
-      <LocalizationProvider dateAdapter={AdapterLuxon}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <StateContext.Provider value={{state, setState}}>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </StateContext.Provider>
-        </ThemeProvider>
-      </LocalizationProvider>
-    </CacheProvider>
+    <>
+      <Head>
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+      </Head>
+      <CacheProvider value={clientSideEmotioNCache}>
+        <LocalizationProvider dateAdapter={AdapterLuxon}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <StateContext.Provider value={{state, setState}}>
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
+            </StateContext.Provider>
+          </ThemeProvider>
+        </LocalizationProvider>
+      </CacheProvider>
+    </>
   );
 }
