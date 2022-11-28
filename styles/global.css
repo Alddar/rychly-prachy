@@ -1,3 +1,6 @@
+body {
+    overscroll-behavior-y: none;
+}
 
 detail-map {
     height: 20rem;

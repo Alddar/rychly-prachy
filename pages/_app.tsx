@@ -65,7 +65,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <Head>
         <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
         <link rel="manifest" href="/manifest.json"/>
-        <meta name="theme-color" content="#000000"/>
+        <meta name="theme-color" content="#1976d2"/>
       </Head>
       <CacheProvider value={clientSideEmotioNCache}>
         <LocalizationProvider dateAdapter={AdapterLuxon}>
