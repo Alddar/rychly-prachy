@@ -50,7 +50,7 @@ export default function Layout({ children }: { children: any }) {
     >
       <List>
         <Link href="/">
-          <ListItem key="home" disablePadding sx={{backgroundColor: '#0061ad', mb: '4px'}}>
+          <ListItem key="home" disablePadding sx={{backgroundColor: '#0061ad', mt: '4px', mb: '4px'}}>
             <ListItemButton>
               <ListItemIcon>
                 <HomeIcon sx={{fill: '#fff'} }/>

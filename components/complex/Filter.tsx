@@ -8,6 +8,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import Stack from "@mui/material/Stack";
 import { FC } from "react";
 import { DateTime } from "luxon";
+import {Divider} from "@mui/material";
 
 const options = ["Praha", "Brno", "Ostrava", "Hradec Králové", "Plzeň"];
 
@@ -62,18 +63,19 @@ interface FilterProps {
 }
 
 export const Filter: FC<FilterProps> = ({ state, setState, setMenuOpen }) => 
-    <Container maxWidth="sm">
-      <Stack spacing={3}>
-        <Typography variant="h4" component="h1">Filtrovat</Typography>
+    <Container maxWidth="sm" sx={{backgroundColor: '#e1f5fe', height: '100%'}}>
+      <Stack spacing={3} pt={'16px'}>
+        <Typography variant="h4" component="h1" color={'#01579b'}>Filtrovat</Typography>
+        <Divider />
         <Autocomplete
           disablePortal
           options={options}
           value={state.location}
           onChange={(_, location) => setState({ location })}
-          renderInput={(params) => <TextField {...params} label="Lokalita" />}
+          renderInput={(params) => <TextField {...params}  label="Lokalita" />}
         />
         <div>
-          <label>Vzdálenost</label>
+          <Typography component={'label'} color={'#01579b'}>Vzdálenost</Typography>
           <Slider
             step={null}
             max={50}
@@ -87,7 +89,7 @@ export const Filter: FC<FilterProps> = ({ state, setState, setMenuOpen }) =>
           />
         </div>
         <div>
-          <label>Odměna</label>
+          <Typography component={'label'} color={'#01579b'}>Odměna</Typography>
           <Slider
             step={null}
             min={90}
