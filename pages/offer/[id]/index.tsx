@@ -188,10 +188,11 @@ export default function Offer() {
                   </Button>
                 </Link>
               ) : (
-                <>
-                  <Typography variant="h5">Hodnocení</Typography>
-                  <RatingIcon rating={offer.rating} />
-                </>
+                  <Box bgcolor={'#e1f5fe'} p={'12px'}>
+                    <Typography variant="h5" color={"#01579b"}>Hodnocení</Typography>
+                    <RatingIcon rating={offer.rating.score}/>
+                    <Typography>{offer.rating.comment}</Typography>
+                  </Box>
               ))}
           </>
         )}
