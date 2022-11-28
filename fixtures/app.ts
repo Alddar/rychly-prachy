@@ -65,7 +65,8 @@ export const offerList: Offer[] = [
         position: [50.026372, 14.517759],
         price: 500,
         duration: 2,
-        ownerId: 1
+        ownerId: 1,
+        interested: false
     },
     {
         id: 2,
@@ -79,7 +80,8 @@ export const offerList: Offer[] = [
         position: [50.020514, 14.499634],
         price: 100,
         duration: 6,
-        ownerId: 3
+        ownerId: 3,
+        interested: false
     },
     {
         id: 3,
@@ -93,7 +95,8 @@ export const offerList: Offer[] = [
         position: [50.051647, 14.479273],
         price: 90,
         duration: 3,
-        ownerId: 1
+        ownerId: 1,
+        interested: false
     }
 ]
 

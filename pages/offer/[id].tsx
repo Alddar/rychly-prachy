@@ -35,15 +35,23 @@ export async function getStaticProps() {
 }
 
 export default function Offer() {
-    const { state } = useContext(StateContext)
+    const { state, setOffer } = useContext(StateContext)
     const router = useRouter()
     const { id } = router.query
-    const offer = getOffer(state.offerList, parseInt(`${id}`));
+    const offer = getOffer(state.offerList, Number(`${id}`));
     const user = getProvider(state.providerList, offer.ownerId)
 
     const position: LatLngExpression = offer.position;
 
-    const [isInterestGiven, setInterestGiven] = useState(false);
+    function handleInterest() {
+        offer.interested = true
+        setOffer(offer)
+    }
+
+    function handleCancelInterest() {
+        offer.interested = false
+        setOffer(offer)
+    }
 
     return (
         <Container maxWidth="sm" sx={{ paddingBottom: "2rem" }}>
@@ -75,7 +83,7 @@ export default function Offer() {
                 </>
             )}
             </Map>
-            {!isInterestGiven ? (
+            {!offer.interested ? (
             <>
                 <Typography variant="h5">Zadavatel</Typography>
                 <Box sx={{ display: "flex" }}>
@@ -87,7 +95,7 @@ export default function Offer() {
                     </Typography>
                 </Box>
                 </Box>
-                <Button variant="contained" onClick={() => setInterestGiven(true)}>
+                <Button variant="contained" onClick={handleInterest}>
                 Projevit zájem a získat kontakt
                 </Button>
             </>
@@ -116,7 +124,7 @@ export default function Offer() {
                     <ListItemText primary={user.phone} />
                 </ListItem>
                 </List>
-                <Button variant="contained" color="error" onClick={() => setInterestGiven(false)}>
+                <Button variant="contained" color="error" onClick={handleCancelInterest}>
                     Zrušit zájem
                 </Button>
             </>

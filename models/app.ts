@@ -26,6 +26,7 @@ export interface Offer {
     distance: number;
     date: DateTime;
     ownerId: number;
+    interested: boolean
 }
 
 export interface User {

@@ -21,7 +21,9 @@ export default function WorkCard({
         }}
       >
         <Box>
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h5" gutterBottom sx={{
+              fontWeight: offer.interested ? "bold" : ""
+          }}>
             {offer.title}
           </Typography>
           <Typography variant="subtitle2" component="div">

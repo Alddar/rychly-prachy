@@ -17,7 +17,7 @@ import "@fontsource/poppins/700.css";
 import "@fontsource/poppins/800.css";
 import "@nextcss/reset";
 import "../styles/global.css";
-import { createContext, useMemo, useState } from "react";
+import {createContext, SetStateAction, useMemo, useState} from "react";
 import { Offer, Provider, User } from "../models/app";
 import { offerList, providerList } from "../fixtures/app";
 import { ThemeProvider } from "@mui/system";
@@ -41,14 +41,24 @@ const defaultState =  {
   providerList
 }
 
-export const StateContext = createContext({
+interface StateContextType {
+  state: State,
+  setState: (state: SetStateAction<State>) => void
+  setOffer: (offer: Offer) => void
+}
+
+export const StateContext = createContext<StateContextType>({
   state: defaultState as State,
-  setState: (modifyState: (state: State) => State) => {}
+  setState: () => {},
+  setOffer: () => {}
 });
 
 export default function App({ Component, pageProps }: AppProps) {
   const [state, setState] = useState<State>(defaultState);
 
+  function setOffer(offer: Offer) {
+    setState(state => ({...state, offerList: state.offerList.map(o => o.id === offer.id ? offer : o)}))
+  }
 
   return (
     <>
@@ -59,7 +69,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <LocalizationProvider dateAdapter={AdapterLuxon}>
           <ThemeProvider theme={theme}>
             <CssBaseline />
-            <StateContext.Provider value={{state, setState}}>
+            <StateContext.Provider value={{state, setState, setOffer}}>
               <Layout>
                 <Component {...pageProps} />
               </Layout>
