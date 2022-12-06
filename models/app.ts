@@ -1,7 +1,7 @@
 import { DateTime } from "luxon";
 import {LatLngExpression} from "leaflet";
 
-export interface Provider extends Person{
+export interface Provider extends Person {
     name: string;
     rating: number;
 }
@@ -10,6 +10,11 @@ export enum OfferStatus {
     FREE = "free",
     TAKEN = "taken",
     COMPLETED = "completed",
+}
+
+export interface OfferRating {
+    score: number;
+    comment: string;
 }
 
 export interface Offer {
@@ -26,7 +31,7 @@ export interface Offer {
     ownerId: string;
     status: OfferStatus;
     interested?: User;
-    rating?: number;
+    rating?: OfferRating;
 }
 
 export class Address {
