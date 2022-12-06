@@ -187,7 +187,7 @@ export const offerList: Offer[] = [
         distance: 10,
         date: DateTime.local(2022, 12, 20, 12, 0),
         position: [50.020514, 14.499634],
-        price: 100,
+        price: 200,
         duration: 6,
         ownerId: providerList[2].id,
         status: OfferStatus.FREE,
