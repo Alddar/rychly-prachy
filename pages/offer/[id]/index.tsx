@@ -24,8 +24,10 @@ import MuiLink from "@mui/material/Link";
 import RatingIcon from "../../../components/complex/RatingIcon";
 import { Alert } from "@mui/material";
 import ReturnBackButton from "../../../components/complex/ReturnBackButton";
-import {ArrowRight, Check, PhoneIphone} from "@mui/icons-material";
+import {ArrowRight, Check, Email, PhoneIphone} from "@mui/icons-material";
 import Divider from "@mui/material/Divider";
+import * as React from "react";
+import HomeIcon from "@mui/icons-material/Home";
 
 export function getStaticPaths() {
   return {
@@ -96,6 +98,17 @@ export default function Offer() {
         <Typography variant="h5" color={"#01579b"}>
           Lokalita
         </Typography>
+        <Box bgcolor={'#e1f5fe'} p={'12px'}>
+        <Stack direction={"row"} spacing={1} alignItems={"center"}>
+          <HomeIcon color={"primary"} />
+          <Typography variant="h6" color={"#01579b"} fontWeight={400}>
+            Adresa
+          </Typography>
+        </Stack>
+        <Typography variant="body1">
+          {offer.address}
+        </Typography>
+        </Box>
         <Map
           className="detail-map"
           center={position}

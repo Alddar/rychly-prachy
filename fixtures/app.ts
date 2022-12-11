@@ -85,7 +85,8 @@ export const offerList: Offer[] = [
         duration: 2,
         ownerId: providerList[0].id,
         status: OfferStatus.COMPLETED,
-        interested: userList[1]
+        interested: userList[1],
+        address: 'U Bořislavky 3, Praha, 160 00',
     },
     {
         id: 2,
@@ -101,6 +102,7 @@ export const offerList: Offer[] = [
         duration: 6,
         ownerId: providerList[2].id,
         status: OfferStatus.FREE,
+        address: 'Na Petřinách 58, Praha, 162 00',
     },
     {
         id: 3,
@@ -116,6 +118,7 @@ export const offerList: Offer[] = [
         duration: 3,
         ownerId: providerList[1].id,
         status: OfferStatus.FREE,
+        address: 'Na Příkopech 22, Praha, 151 00',
     },
     {
         id: 4,
@@ -131,6 +134,7 @@ export const offerList: Offer[] = [
         duration: 2,
         ownerId: providerList[1].id,
         status: OfferStatus.FREE,
+        address: 'Václavské náměstí 22, Praha, 110 00',
     },
     {
         id: 5,
@@ -146,6 +150,8 @@ export const offerList: Offer[] = [
         duration: 8,
         ownerId: providerList[0].id,
         status: OfferStatus.FREE,
+        // Get address from GPS coords in position
+        address: 'Branická 1, 147 00 Praha'
     },
     {
         id: 6,
@@ -161,6 +167,7 @@ export const offerList: Offer[] = [
         duration: 4,
         ownerId: providerList[0].id,
         status: OfferStatus.FREE,
+        address: 'Hradčanské náměstí 1, 120 00 Praha',
     },
     {
         id: 7,
@@ -176,6 +183,7 @@ export const offerList: Offer[] = [
         duration: 4,
         ownerId: providerList[0].id,
         status: OfferStatus.FREE,
+        address: 'Na Příkopech 22, Praha, 151 00',
     },
     {
         id: 8,
@@ -191,6 +199,7 @@ export const offerList: Offer[] = [
         duration: 6,
         ownerId: providerList[2].id,
         status: OfferStatus.FREE,
+        address: 'Na Petřinách 58, Praha, 162 00',
     },
     {
         id: 9,
@@ -206,6 +215,8 @@ export const offerList: Offer[] = [
         duration: 3,
         ownerId: providerList[1].id,
         status: OfferStatus.FREE,
+        // Address in brno
+        address: 'Ostravská 1, 602 00 Brno',
     },
     {
         id: 10,
@@ -221,6 +232,7 @@ export const offerList: Offer[] = [
         duration: 2,
         ownerId: providerList[1].id,
         status: OfferStatus.FREE,
+        address: 'Přemyslova 1, 602 00 Brno',
     },
     {
         id: 11,
@@ -236,6 +248,7 @@ export const offerList: Offer[] = [
         duration: 8,
         ownerId: providerList[0].id,
         status: OfferStatus.FREE,
+        address: 'Komenského 1, 602 00 Ostrava',
     },
     {
         id: 12,
@@ -251,6 +264,7 @@ export const offerList: Offer[] = [
         duration: 4,
         ownerId: providerList[0].id,
         status: OfferStatus.FREE,
+        address: 'Hradčanské náměstí 1, 602 00 Ostrava',
     },
     {
         id: 13,
@@ -266,6 +280,7 @@ export const offerList: Offer[] = [
         duration: 4,
         ownerId: providerList[0].id,
         status: OfferStatus.FREE,
+        address: 'Na Příkopech 22, Plzeň, 602 00',
     }
 ]
 

@@ -32,6 +32,7 @@ export interface Offer {
     status: OfferStatus;
     interested?: User;
     rating?: OfferRating;
+    address?: string;
 }
 
 export class Address {
