@@ -129,7 +129,7 @@ export default function Home() {
                 )}
             </Stack>
         </Stack>
-      <Box display={'flex'} alignItems={'flex-start'} gap={'0.4em'} paddingBottom={'1em'} pt={'0.5em'}>
+      <Box display={'flex'} alignItems={'flex-start'} gap={'0.4em'} paddingBottom={'1em'} pt={'0.5em'} flexWrap={'wrap'}>
         {filterState.filters.location ? (
           <Chip
               color={'primary'}
