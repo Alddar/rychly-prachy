@@ -22,7 +22,7 @@ import { OfferStatus } from "../../../models/app";
 import Link from "next/link";
 import MuiLink from "@mui/material/Link";
 import RatingIcon from "../../../components/complex/RatingIcon";
-import { Alert } from "@mui/material";
+import {Alert, Modal} from "@mui/material";
 import ReturnBackButton from "../../../components/complex/ReturnBackButton";
 import {ArrowRight, Check, Email, PhoneIphone} from "@mui/icons-material";
 import Divider from "@mui/material/Divider";
@@ -59,12 +59,17 @@ export default function Offer() {
     }
     offer.interested = state.user;
     setOffer(offer);
+    handleClose();
   }
 
   function handleCancelInterest() {
     offer.interested = undefined;
     setOffer(offer);
   }
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   return (
     <Container maxWidth="sm" sx={{ paddingBottom: "2rem", px: 0 }}>
@@ -148,7 +153,7 @@ export default function Offer() {
                 </Alert>
               </MuiLink>
             ) : (
-              <Button variant="contained" onClick={handleInterest}>
+              <Button variant="contained" onClick={handleOpen}>
                 Projevit zájem a získat kontakt
               </Button>
             )}
@@ -210,6 +215,37 @@ export default function Offer() {
           </>
         )}
       </Stack>
+      <Modal
+          open={open}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+      >
+        <Box my={'1em'} height={'340px'} style={{
+          position: 'absolute' as 'absolute',
+          top: '50%',
+          left: '50%',
+          width: '90%',
+          padding: '1em',
+          backgroundColor: '#e1f5fe',
+          transform: 'translate(-50%, -50%)',
+        }}>
+          <Typography id="modal-modal-title" color={'primary'} variant="h6" component="h2">
+            Projevit zájem o nabídku
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Projevení zájmu o brigádu je závazné. <br/><br/> Dále souhlasíte, že využijete kontaktní údaje pouze pro komunikaci s poskytovatelem nabídky a nebudete je poskytovat třetím osobám.
+            <br/><br/><strong >Přejete si pokračovat?</strong>
+          </Typography>
+            <Box sx={{ display: 'flex', justifyContent: 'flex-end', mt: 2 }}>
+                <Button variant="contained" onClick={handleClose} color={'error'}>
+                    Zrušit
+                </Button>
+                <Button variant="contained" onClick={handleInterest} sx={{ ml: 2 }} color={'primary'}>
+                    Pokračovat
+                </Button>
+            </Box>
+        </Box>
+      </Modal>
     </Container>
   );
 }
