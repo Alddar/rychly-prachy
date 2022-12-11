@@ -67,6 +67,7 @@ export const Filter: FC<FilterProps> = ({ state, setState, setMenuOpen }) =>
       <Stack spacing={3} pt={'16px'}>
         <Typography variant="h4" component="h1" color={'#01579b'}>Filtrovat</Typography>
         <Divider />
+        <Typography component={'label'} color={'#01579b'}>Lokalita</Typography>
         <Autocomplete
           disablePortal
           options={options}
@@ -75,7 +76,7 @@ export const Filter: FC<FilterProps> = ({ state, setState, setMenuOpen }) =>
           renderInput={(params) => <TextField {...params}  label="Lokalita" />}
         />
         <div>
-          <Typography component={'label'} color={'#01579b'}>Vzdálenost</Typography>
+          <Typography component={'label'} color={'#01579b'}>Vzdálenost ({`<${state.distance} km`})</Typography>
           <Slider
             step={null}
             max={50}
@@ -89,7 +90,7 @@ export const Filter: FC<FilterProps> = ({ state, setState, setMenuOpen }) =>
           />
         </div>
         <div>
-          <Typography component={'label'} color={'#01579b'}>Odměna</Typography>
+          <Typography component={'label'} color={'#01579b'}>Minimální ohodnocení ({`<${state.cash} Kč`})</Typography>
           <Slider
             step={null}
             min={90}
@@ -102,6 +103,7 @@ export const Filter: FC<FilterProps> = ({ state, setState, setMenuOpen }) =>
             valueLabelDisplay="auto"
           />
         </div>
+        <Typography component={'label'} color={'#01579b'}>Datum</Typography>
         <DatePicker
             label="Od"
             value={state.from}
@@ -114,7 +116,7 @@ export const Filter: FC<FilterProps> = ({ state, setState, setMenuOpen }) =>
               onChange={(to) => setState({ to })}
               renderInput={(params) => <TextField {...params} />}
             />
-        <Button variant="contained" onClick={() => setMenuOpen(false)}>Zavřít</Button>
+        <Button variant="contained" onClick={() => setMenuOpen(false)}>Potvrdit změny</Button>
         <Button variant="contained" color="error" onClick={() => {setState(defaultFilterState); setMenuOpen(false)}}>Zrušit filtry</Button>
       </Stack>
     </Container>
