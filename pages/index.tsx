@@ -83,15 +83,56 @@ export default function Home() {
           }}
         />
       </Box>
-      <Stack direction={"row"} pb={"1em"} height={"3rem"}>
+        <Stack direction={"row"} spacing={2} justifyContent={"space-between"}>
         <FilterAltOutlined
-          sx={{ marginRight: "1rem", marginTop: "0.3rem" }}
-          onClick={() =>
-            setFilterState((state) => ({ ...state, menuOpen: true }))
-          }
+            sx={{ marginRight: "1rem", marginTop: "0.3rem" }}
+            onClick={() =>
+                setFilterState((state) => ({ ...state, menuOpen: true }))
+            }
         />
+            <Stack
+                direction={"row"}
+                sx={{ marginLeft: "auto" }}
+                spacing={"6px"}
+                alignItems={"center"}
+            >
+                <FormControl size="small" sx={{ minWidth: 100 }}>
+                    <InputLabel id="demo-simple-select-label">Řazení</InputLabel>
+                    <Select
+                        labelId="demo-simple-select-label"
+                        value={filterState.sort}
+                        label="Řazení"
+                        onChange={(e) =>
+                            setFilterState((state) => ({
+                                ...state,
+                                sort: e.target.value || "",
+                            }))
+                        }
+                    >
+                        <MenuItem value="distance">Vzdálenost</MenuItem>
+                        <MenuItem value="price">Odměna</MenuItem>
+                        <MenuItem value="date">Datum</MenuItem>
+                    </Select>
+                </FormControl>
+                {filterState.sortDirection ? (
+                    <ArrowDownwardIcon
+                        onClick={() =>
+                            setFilterState((state) => ({ ...state, sortDirection: false }))
+                        }
+                    />
+                ) : (
+                    <ArrowUpwardIcon
+                        onClick={() =>
+                            setFilterState((state) => ({ ...state, sortDirection: true }))
+                        }
+                    />
+                )}
+            </Stack>
+        </Stack>
+      <Box display={'flex'} alignItems={'flex-start'} gap={'0.4em'} paddingBottom={'1em'} pt={'0.5em'}>
         {filterState.filters.location ? (
           <Chip
+              color={'primary'}
             label={filterState.filters.location}
             onDelete={() => handleFilterChange({ location: null })}
           />
@@ -99,7 +140,7 @@ export default function Home() {
           <></>
         )}
         {filterState.filters.distance != defaultFilterState.distance ? (
-          <Chip
+          <Chip color={'primary'}
             label={`<${filterState.filters.distance}km`}
             onDelete={() =>
               handleFilterChange({ distance: defaultFilterState.distance })
@@ -109,7 +150,7 @@ export default function Home() {
           <></>
         )}
         {filterState.filters.cash != defaultFilterState.cash ? (
-          <Chip
+          <Chip color={'primary'}
             label={`>${filterState.filters.cash}kč`}
             onDelete={() =>
               handleFilterChange({ cash: defaultFilterState.cash })
@@ -119,7 +160,7 @@ export default function Home() {
           <></>
         )}
         {filterState.filters.from || filterState.filters.to ? (
-          <Chip
+          <Chip color={'primary'}
             label={`${filterState.filters.from?.toLocaleString() ?? "∞"} - ${
               filterState.filters.to?.toLocaleString() ?? "∞"
             }`}
@@ -128,45 +169,7 @@ export default function Home() {
         ) : (
           <></>
         )}
-        <Stack
-          direction={"row"}
-          sx={{ marginLeft: "auto" }}
-          spacing={"6px"}
-          alignItems={"center"}
-        >
-          <FormControl size="small" sx={{ minWidth: 100 }}>
-            <InputLabel id="demo-simple-select-label">Řazení</InputLabel>
-            <Select
-              labelId="demo-simple-select-label"
-              value={filterState.sort}
-              label="Řazení"
-              onChange={(e) =>
-                setFilterState((state) => ({
-                  ...state,
-                  sort: e.target.value || "",
-                }))
-              }
-            >
-              <MenuItem value="distance">Vzdálenost</MenuItem>
-              <MenuItem value="price">Odměna</MenuItem>
-              <MenuItem value="date">Datum</MenuItem>
-            </Select>
-          </FormControl>
-          {filterState.sortDirection ? (
-            <ArrowDownwardIcon
-              onClick={() =>
-                setFilterState((state) => ({ ...state, sortDirection: false }))
-              }
-            />
-          ) : (
-            <ArrowUpwardIcon
-              onClick={() =>
-                setFilterState((state) => ({ ...state, sortDirection: true }))
-              }
-            />
-          )}
-        </Stack>
-      </Stack>
+      </Box>
       <Stack spacing={2} mb={"2em"}>
         {(filterState.sort
           ? [...state.offerList].sort(
