@@ -75,12 +75,13 @@ export const Filter: FC<FilterProps> = ({ state, setState, setMenuOpen }) =>
           onChange={(_, location) => setState({ location })}
           renderInput={(params) => <TextField {...params}  label="Lokalita" />}
         />
-        <div>
-          <Typography component={'label'} color={'#01579b'}>Vzdálenost ({`<${state.distance} km`})</Typography>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <Typography component={'label'} color={'#01579b'}>Vzdálenost ({`<${state.distance} km`})</Typography>
           <Slider
             step={null}
             max={50}
             min={1}
+            sx={{ alignSelf: 'center', width: '80%' }}
             marks={distanceMarks}
             value={state.distance}
             onChange={(_, distance) => setState({ distance: distance as number })}
@@ -89,12 +90,13 @@ export const Filter: FC<FilterProps> = ({ state, setState, setMenuOpen }) =>
             valueLabelDisplay="auto"
           />
         </div>
-        <div>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
           <Typography component={'label'} color={'#01579b'}>Minimální ohodnocení ({`<${state.cash} Kč`})</Typography>
           <Slider
             step={null}
             min={90}
             max={250}
+            sx={{ alignSelf: 'center', width: '80%' }}
             marks={cashMarks}
             value={state.cash}
             onChange={(_, cash) => setState({ cash: cash as number })}
