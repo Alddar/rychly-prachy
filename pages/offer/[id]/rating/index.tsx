@@ -146,7 +146,6 @@ export default function OfferRating() {
                 <TextField
                     label="Komentář k hodnocení"
                     multiline
-                    rows={1}
                     variant="standard"
                     value={comment}
                     onChange={(event) => {
