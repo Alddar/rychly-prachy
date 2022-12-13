@@ -63,7 +63,7 @@ export default function SignIn() {
       return;
     }
 
-    const user = userList.find((user) => user.email === email && user.password === password)
+    const user = userList.find((user) => user.email.toLowerCase() === email.toLowerCase() && user.password === password)
 
     if (!user) {
       setError(
